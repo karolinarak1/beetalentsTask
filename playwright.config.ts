@@ -1,19 +1,34 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const isCI = !!process.env.CI;
+
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
+
+  // HTML report for local + CI (uploaded as artifact in GitHub Actions)
   reporter: [['html', { open: 'never' }]],
+
+  // CI stability
+  retries: isCI ? 2 : 0,
+  workers: isCI ? 2 : undefined,
+
   use: {
     baseURL: 'https://www.saucedemo.com',
     testIdAttribute: 'data-test',
-    trace: 'on-first-retry',
+
+    // Artifacts on failure (required by the task)
     screenshot: 'only-on-failure',
+    trace: 'retain-on-failure', 
     video: 'retain-on-failure'
   },
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 2 : undefined,
+
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } }
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome']
+      }
+    }
   ]
 });

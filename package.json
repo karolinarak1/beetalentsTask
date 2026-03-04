@@ -1,20 +1,18 @@
 {
   "name": "beetalentstask",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
+  "description": "Playwright UI automation for SauceDemo",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/karolinarak1/beetalentsTask.git"
+    "url": "https://github.com/karolinarak1/beetalentsTask.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/karolinarak1/beetalentsTask/issues"
-  },
-  "homepage": "https://github.com/karolinarak1/beetalentsTask#readme",
   "devDependencies": {
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.3.3"
